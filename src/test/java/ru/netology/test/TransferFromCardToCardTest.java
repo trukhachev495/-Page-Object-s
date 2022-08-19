@@ -65,7 +65,7 @@ public class TransferFromCardToCardTest {
 //        transactionPage.errorLimit();
 //    }
     @Test
-    public void shouldTransferFromSecondToSecondCard() {
+    public void transferToANonExistentCard() {
         int amount = 5000;
         var cardBalance = new CardBalance();
         var firstCardBalanceStart = cardBalance.getFirstCardBalance();

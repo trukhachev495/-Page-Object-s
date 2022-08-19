@@ -13,7 +13,7 @@ public class TransactionPage {
 
     public void transferMoney(int amount, String from) {
         sumAmount.setValue(valueOf(amount));
-        fromAccount.setValue(String.valueOf(from));
+        fromAccount.setValue(valueOf(from));
         clickReplenish.click();
         new CardBalance();
     }
