@@ -23,12 +23,7 @@ public class CardBalance {
         heading.shouldBe(visible);
     }
 
-    public static TransactionPage pushFirstCardButton(int index) {
-        $$x("//button[@data-test-id=\"action-deposit\"]").get(index).click();
-        return new TransactionPage();
-    }
-
-    public static TransactionPage pushSecondCardButton(int index) {
+    public static TransactionPage pushCardButton(int index) {
         $$x("//button[@data-test-id=\"action-deposit\"]").get(index).click();
         return new TransactionPage();
     }

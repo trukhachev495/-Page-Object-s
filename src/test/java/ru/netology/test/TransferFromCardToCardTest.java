@@ -10,7 +10,8 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.data.DataHelper.getFirstCardNumber;
 import static ru.netology.data.DataHelper.getSecondCardNumber;
-import static ru.netology.page.CardBalance.pushSecondCardButton;
+import static ru.netology.page.CardBalance.pushCardButton;
+
 
 public class TransferFromCardToCardTest {
     @BeforeEach
@@ -30,7 +31,7 @@ public class TransferFromCardToCardTest {
         var cardBalance = new CardBalance();
         var firstCardBalanceStart = cardBalance.getFirstCardBalance();
         var secondCardBalanceStart = cardBalance.getSecondCardBalance();
-        var transactionPage = CardBalance.pushSecondCardButton(1);
+        var transactionPage = CardBalance.pushCardButton(1);
         transactionPage.transferMoney(amount, String.valueOf(getFirstCardNumber()));
         var firstCardBalanceFinish = firstCardBalanceStart - amount;
         var secondCardBalanceFinish = secondCardBalanceStart + amount;
@@ -45,7 +46,7 @@ public class TransferFromCardToCardTest {
         var cardBalance = new CardBalance();
         var firstCardBalanceStart = cardBalance.getFirstCardBalance();
         var secondCardBalanceStart = cardBalance.getSecondCardBalance();
-        var transactionPage = CardBalance.pushFirstCardButton(0);
+        var transactionPage = CardBalance.pushCardButton(0);
         transactionPage.transferMoney(amount, String.valueOf(getSecondCardNumber()));
         var firstCardBalanceFinish = firstCardBalanceStart + amount;
         var secondCardBalanceFinish = secondCardBalanceStart - amount;
@@ -65,13 +66,14 @@ public class TransferFromCardToCardTest {
 //        transactionPage.errorLimit();
 //    }
     @Test
-    public void transferToANonExistentCard() {
+    public void shouldTransferFromSecondToSecondCard() {
         int amount = 5000;
         var cardBalance = new CardBalance();
         var firstCardBalanceStart = cardBalance.getFirstCardBalance();
         var secondCardBalanceStart = cardBalance.getSecondCardBalance();
-        var transactionPage = pushSecondCardButton(1);
-        transactionPage.transferMoney(amount, String.valueOf("2345345345"));
-        transactionPage.invalidCard();
+        var transactionPage=pushCardButton(1);
+        transactionPage.transferMoney(amount, String.valueOf(getSecondCardNumber()));
+        //должна выскочить ошибка
+        // transactionPage.invalidCard();
     }
 }
