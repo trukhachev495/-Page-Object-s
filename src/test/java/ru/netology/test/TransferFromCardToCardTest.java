@@ -8,8 +8,7 @@ import ru.netology.page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.netology.data.DataHelper.getFirstCardNumber;
-import static ru.netology.data.DataHelper.getSecondCardNumber;
+import static ru.netology.data.DataHelper.*;
 import static ru.netology.page.CardBalance.pushCardButton;
 
 
@@ -55,7 +54,7 @@ public class TransferFromCardToCardTest {
         assertEquals(secondCardBalanceFinish, secondCardBalanceStart - amount);
     }
 
-//    @Test
+    //    @Test
 //    public void shouldTransferExceedCardBalance() {
 //        int amount = 30000;
 //        var cardBalance = new CardBalance();
@@ -71,9 +70,20 @@ public class TransferFromCardToCardTest {
         var cardBalance = new CardBalance();
         var firstCardBalanceStart = cardBalance.getFirstCardBalance();
         var secondCardBalanceStart = cardBalance.getSecondCardBalance();
-        var transactionPage=pushCardButton(1);
+        var transactionPage = pushCardButton(1);
         transactionPage.transferMoney(amount, String.valueOf(getSecondCardNumber()));
         //должна выскочить ошибка
         // transactionPage.invalidCard();
+    }
+
+    @Test
+    public void TransferFromANonExistentCard() {
+        int amount = 5000;
+        var cardBalance = new CardBalance();
+        var firstCardBalanceStart = cardBalance.getFirstCardBalance();
+        var secondCardBalanceStart = cardBalance.getSecondCardBalance();
+        var transactionPage = pushCardButton(1);
+        transactionPage.transferMoney(amount, String.valueOf(getThirdCardNumber()));
+        transactionPage.invalidCard();
     }
 }
